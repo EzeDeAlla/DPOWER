@@ -24,5 +24,13 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    stock: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    published: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    }
   })
 };

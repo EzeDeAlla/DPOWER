@@ -12,10 +12,6 @@ module.exports = (sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    creator: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     likes: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -24,9 +20,13 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    content: {
+    multimedia: {
       type: DataTypes.STRING,
+      allowNull: false
+    },
+    description: {
+      type: DataTypes.TEXT,
       allowNull: false,
-    }
+    },
   })
 };
