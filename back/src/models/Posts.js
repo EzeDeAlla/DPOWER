@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('Product', {
+  sequelize.define('Post', {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -12,31 +12,21 @@ module.exports = (sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    UserId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      unique: true,
-    },
-    TotalPosts: {
-      type: DataTypes.INTEGER,
-    },
-    powers: {
+    creator: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    sportCategory: {
+    likes: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    powersGained: {  //The total amount of Powers obtained in this post
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    content: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    age: {
-      type: DataTypes.INTEGER,
-    },
-    nationality: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    description: {
-      type: DataTypes.STRING
     }
   })
 };

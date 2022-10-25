@@ -12,31 +12,17 @@ module.exports = (sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    UserId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      unique: true,
-    },
-    TotalPosts: {
-      type: DataTypes.INTEGER,
-    },
-    powers: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    sportCategory: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    age: {
-      type: DataTypes.INTEGER,
-    },
-    nationality: {
+    category: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
-      type: DataTypes.STRING
-    }
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   })
 };

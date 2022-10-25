@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('User', {
+  sequelize.define('Comment', {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -12,17 +12,17 @@ module.exports = (sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    level: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    email: {
+    Comments: {
       type: DataTypes.STRING,
       allowNull: false
     },
+    author: {
+      type: DataTypes.INTEGER,   // Here we put the author ID
+      allowNull: false
+    },
+    postOwner: {
+      type: DataTypes.INTEGER, // Here we put the ID of the post
+      allowNull: false
+    }
   });
 };
