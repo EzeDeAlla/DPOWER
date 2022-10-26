@@ -1,19 +1,39 @@
 const { Router } = require('express');
 const router = Router();
-const { User } = require('../db');
+const { UserInfo } = require('../db');
 
 router.post('', async (req, res) => {
   try {
-    const { name, email, password } = req.body;
-    const user = await User.findOne({
-      where: { email },
+    const {
+      id,
+      name,
+      sport,
+      age,
+      nationality,
+      description,
+      post,
+      username,
+      mail,
+      powers,
+      validated,
+    } = req.body;
+    const user = await UserInfo.findOne({
+      where: { mail },
     });
-    if (name && email && password) {
+    if (id && name && sport && nationality && username && mail && powers && validated) {
       if (!user) {
-        const newUser = await User.create({
+        const newUser = await UserInfo.create({
+          id,
           name,
-          email,
-          password,
+          sport,
+          age,
+          nationality,
+          description,
+          post,
+          username,
+          mail,
+          powers,
+          validated,
         });
         res.status(200).send(newUser);
       } else {
