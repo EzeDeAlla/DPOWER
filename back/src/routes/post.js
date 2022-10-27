@@ -2,6 +2,8 @@ const { Router } = require('express');
 const router = Router();
 const { Post } = require('../db');
 
+
+          // || /POST || //
 router.get('', async (req, res) => {
   try {
     const allPost = await Post.findAll();
@@ -12,6 +14,8 @@ router.get('', async (req, res) => {
   }
 });
 
+
+          // || POST /POST || //
 router.post('', async (req, res) => {
   try {
     const { likes, powersGained, multimedia, description, id } = req.body;
@@ -32,6 +36,8 @@ router.post('', async (req, res) => {
   }
 });
 
+
+          // || DELETE /POST || //
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -46,6 +52,8 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+
+          // || PUT /POST || //
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;

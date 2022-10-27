@@ -4,67 +4,9 @@ const axios = require('axios');
 const { allProducts, dbData, todaInfo } = require('../controllers');
 const { Product } = require('../db');
 
-// const dataBaseTesting = [
 
-//   (item1 = {
-//     name: 'nombrePrueba1',
-//     category: 'categoriaPrueba1',
-//     price: 1,
-//     stock: 1,
-//     published: 1,
-//   }),
-//   (item2 = {
-//     name: 'nombrePrueba2',
-//     category: 'categoriaPrueba2',
-//     price: 1,
-//     stock: 1,
-//     published: 1,
-//   }),
-//   (item3 = {
-//     name: 'nombrePrueba3',
-//     category: 'categoriaPrueba3',
-//     price: 1,
-//     stock: 1,
-//     published: 1,
-//   }),
-//   (item4 = {
-//     name: 'nombrePrueba4',
-//     category: 'categoriaPrueba4',
-//     price: 1,
-//     stock: 1,
-//     published: 1,
-//   }),
-//   (item5 = {
-//     name: 'nombrePrueba5'
-//     category: 'categoriaPrueba5',
-//     price: 1,
-//     stock: 1,
-//     published: 1,
-//   }),
-//   (item6 = {
-//     name: 'nombrePrueba6',
-//     category: 'categoriaPrueba6',
-//     price: 1,
-//     stock: 1,
-//     published: 1,
-//   }),
-// ];
 
-// dataBaseTesting.map(
-//   async (el) =>
-//     await Product.create({
-//       name: el.name,
-//       category: el.category,
-//       price: el.price,
-//       stock: el.stock,
-//       published: el.published,
-//     })
-// );
-// const mostrar = async () => {
-//   console.log(await Product.findAll());
-// };
-// mostrar();
-// || /productos || //
+          // || /PRODUCTOS || //
 router.get('', async (req, res) => {
   try {
     const products = await todaInfo();
@@ -74,7 +16,7 @@ router.get('', async (req, res) => {
   }
 });
 
-// || /productos/id || //
+          // || /PRODUCTOS/:ID || //
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
   const products = await todaInfo();
@@ -86,6 +28,8 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+
+          // || POST /PRODUCTOS || //
 router.post('', async (req, res) => {
   try {
     const { id, name, category, price, stock, published } = req.body;
@@ -109,6 +53,8 @@ router.post('', async (req, res) => {
   }
 });
 
+
+          // || DELETE /PRODUCTOS || //
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -123,6 +69,8 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+
+          // || PUT /PRODUCTOS || //
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;

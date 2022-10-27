@@ -2,6 +2,8 @@ const { Router } = require('express');
 const router = Router();
 const { Comment } = require('../db');
 
+
+          // || POST /COMENTARIOS || //
 router.post('', async (req, res) => {
   try {
     const { id, content } = req.body;
@@ -19,6 +21,8 @@ router.post('', async (req, res) => {
   }
 });
 
+
+          // || DELETE /COMENTARIOS || //
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
