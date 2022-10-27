@@ -49,27 +49,26 @@ router.post('', async (req, res) => {
   }
 });
 
-// || /usuarios || //
-router.get('', async (req, res) => {
-  try {
-    let users = await infoUser();
-    res.status(200).send(users);
-  } catch (error) {
-    res.status(400).send(error);
-  }
-});
-
-// || /usuarios/id || //
-// router.get('/:id', async (req, res) => {
-//   const id = req.params.id;
-//   const users = await infoUser();
-//   if (id) {
-//     const filterId = await users.filter((e) => e.id == id);
-//     filterId.length
-//       ? res.status(200).send(filterId)
-//       : res.status(400).send('Id del usuario no encontrada');
+// || /usuarios api externa || //
+// router.get('', async (req, res) => {
+//   try {
+//     let users = await infoUser();
+//     res.status(200).send(users);
+//   } catch (error) {
+//     res.status(400).send(error);
 //   }
 // });
+
+// || /usuarios base de datos nuestra || //
+router.get('', async (req, res) => {
+  try {
+    const allUsers = await UserInfo.findAll();
+
+    res.json(allUsers);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
