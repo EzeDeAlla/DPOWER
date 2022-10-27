@@ -7,15 +7,15 @@ const { UserInfo } = require('../db');
 
 
                     // || /usuarios || //
-router.get('', async (req, res) => {
-    try{
+// router.get('', async (req, res) => {
+//     try{
     
-    let users = await allUsers();
-    res.status(200).send(users);
-    } catch(error){
-        res.status(400).send(error);
-    }
-})
+//     let users = await allUsers();
+//     res.status(200).send(users);
+//     } catch(error){
+//         res.status(400).send(error);
+//     }
+// })
 
                     // || /usuarios/id || //
 router.get('/:id', async (req, res) => {
@@ -27,8 +27,15 @@ router.get('/:id', async (req, res) => {
         ? res.status(200).send(filterId)
         : res.status(400).send('Id del usuario no encontrada');
     }
-})
-
+  })
+  
+  // | USUARIOS/:ID DATABASE FUNCIONAL
+  router.get('/:id', async (req, res) => {
+  const id = req.params.id;
+  const user = await UserInfo.findByPk(id);
+  
+  res.json(user);
+  });
                     // | POST USUARIOS | //
 router.post('', async (req, res) => {
     try {
@@ -74,14 +81,7 @@ router.post('', async (req, res) => {
   });
 
 
-                // | USUARIOS/:ID DATABASE FUNCIONAL
-  router.get('/:id', async (req, res) => {
-    const id = req.params.id;
-    const user = await UserInfo.findByPk(id);
-  
-    res.json(user);
-  });
-  
+
 
                 // | PUT USUARIOS | //
   router.put('/:id', async (req, res) => {
