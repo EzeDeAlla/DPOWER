@@ -57,6 +57,16 @@ router.get('', async (req, res) => {
   }
 });
 
+// router.get('', async (req, res) => {
+//   try {
+//     const allUsers = await UserInfo.findAll();
+
+//     res.json(allUsers);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// });
+
 // || /usuarios/id || //
 // router.get('/:id', async (req, res) => {
 //   const id = req.params.id;
