@@ -35,13 +35,13 @@ router.post('', async (req, res) => {
           powers,
           validated,
         });
-        res.status(200).send(newUser);
+        res.json(newUser);
       } else {
         throw new Error('user already exists');
       }
     }
   } catch (error) {
-    res.status(400).send(error);
+    res.status(500).json({ message: error.message });
   }
 });
 

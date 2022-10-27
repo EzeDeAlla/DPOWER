@@ -10,12 +10,26 @@ router.post('', async (req, res) => {
         id,
         content,
       });
-      res.status(200).send(newComment);
+      res.json(newComment);
     } else {
-      throw new Error();
+      throw new Error('the required data is empty');
     }
   } catch (error) {
-    res.status(400).send(error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Comment.destroy({
+      where: {
+        id,
+      },
+    });
+    res.sendStatus(204);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
   }
 });
 
