@@ -4,7 +4,7 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('User', {
-    id: {
+    id: {  // Do not use in routes because it is automatically assigned when creating a new element
       type: DataTypes.INTEGER,
       allowNull: false,
 

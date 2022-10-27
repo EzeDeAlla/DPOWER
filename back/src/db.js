@@ -52,8 +52,8 @@ Post.belongsTo(UserInfo);
 Comment.belongsTo(Post);
 Comment.belongsTo(UserInfo);
 Order.belongsTo(UserInfo);
-Order.belongsToMany(Product, {through: 'OrderProduct'});
-Product.belongsToMany(Order, {through: 'OrderProduct'});
+Order.belongsToMany(Product, { through: 'OrderProduct' });
+Product.belongsToMany(Order, { through: 'OrderProduct' });
 Product.belongsTo(UserInfo);
 
 module.exports = {

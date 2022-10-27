@@ -4,10 +4,9 @@ const { Comment } = require('../db');
 
 router.post('', async (req, res) => {
   try {
-    const { id, content } = req.body;
-    if (id && content) {
+    const { content } = req.body;
+    if (content) {
       const newComment = await Comment.create({
-        id,
         content,
       });
       res.json(newComment);

@@ -4,14 +4,13 @@ const { Post } = require('../db');
 
 router.post('', async (req, res) => {
   try {
-    const { likes, powersGained, multimedia, description, id } = req.body;
-    if ((likes && powersGained, multimedia, description, id)) {
+    const { likes, powersGained, multimedia, description } = req.body;
+    if ((likes && powersGained, multimedia, description)) {
       const newPost = await Post.create({
         likes,
         powersGained,
         multimedia,
-        description,
-        id,
+        description
       });
       res.json(newPost);
     } else {
