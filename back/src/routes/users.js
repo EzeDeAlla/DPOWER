@@ -1,5 +1,7 @@
 const { Router } = require('express');
 const router = Router();
+const axios = require('axios');
+const { allUsers, infoUser } = require('../controllers');
 const { UserInfo } = require('../db');
 
 router.post('', async (req, res) => {
@@ -42,6 +44,51 @@ router.post('', async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+});
+
+// || /usuarios || //
+router.get('', async (req, res) => {
+  try {
+    let users = await infoUser();
+    res.status(200).send(users);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+// || /usuarios/id || //
+// router.get('/:id', async (req, res) => {
+//   const id = req.params.id;
+//   const users = await infoUser();
+//   if (id) {
+//     const filterId = await users.filter((e) => e.id == id);
+//     filterId.length
+//       ? res.status(200).send(filterId)
+//       : res.status(400).send('Id del usuario no encontrada');
+//   }
+// });
+
+router.get('/:id', async (req, res) => {
+  const id = req.params.id;
+  const user = await UserInfo.findByPk(id);
+
+  res.json(user);
+});
+
+router.put('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { powers } = req.query;
+
+    const user = await UserInfo.findByPk(id);
+    user.powers = powers;
+
+    await user.save();
+
+    res.json(user);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
   }
 });
 
