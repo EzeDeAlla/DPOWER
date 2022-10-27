@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('UserInfo', {
+  sequelize.define('Product', {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -16,36 +16,19 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    sport: {
+    category: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    age: {
-      type: DataTypes.INTEGER,
-    },
-    nationality: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    description: {
-      type: DataTypes.STRING
-    },
-    post: {  // How many posts has the user published
-      type: DataTypes.INTEGER,
-    },
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    mail: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    powers: {
+    price: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    validated: {
+    stock: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    published: {
       type: DataTypes.INTEGER,
       allowNull: false
     }
