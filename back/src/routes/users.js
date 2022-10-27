@@ -47,17 +47,6 @@ router.post('', async (req, res) => {
   }
 });
 
-// || /usuarios api externa || //
-// router.get('', async (req, res) => {
-//   try {
-//     let users = await infoUser();
-//     res.status(200).send(users);
-//   } catch (error) {
-//     res.status(400).send(error);
-//   }
-// });
-
-// || /usuarios base de datos nuestra || //
 router.get('', async (req, res) => {
   try {
     const allUsers = await UserInfo.findAll();

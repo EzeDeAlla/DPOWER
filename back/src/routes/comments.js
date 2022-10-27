@@ -22,12 +22,17 @@ router.post('', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    await Comment.destroy({
-      where: {
-        id,
-      },
-    });
-    res.sendStatus(204);
+    const comment = await Comment.findByPk(id);
+    if (comment !== null) {
+      await Comment.destroy({
+        where: {
+          id,
+        },
+      });
+      res.sendStatus(204);
+    } else {
+      throw new Error('the id does not exist');
+    }
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
