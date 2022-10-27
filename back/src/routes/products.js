@@ -35,7 +35,7 @@ const { Product } = require('../db');
 //     published: 1,
 //   }),
 //   (item5 = {
-//     name: 'nombrePrueba5',
+//     name: 'nombrePrueba5'
 //     category: 'categoriaPrueba5',
 //     price: 1,
 //     stock: 1,
