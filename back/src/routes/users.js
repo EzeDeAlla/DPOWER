@@ -37,7 +37,7 @@ router.post('', async (req, res) => {
         });
         res.json(newUser);
       } else {
-        throw new Error('user already exists');
+        throw new Error('That email has already been used'); // This message appears only when the email entered is already in the database
       }
     }
   } catch (error) {
