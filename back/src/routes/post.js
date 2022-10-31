@@ -7,7 +7,6 @@ const { Post } = require('../db');
 router.get('', async (req, res) => {
   try {
     const allPost = await Post.findAll();
-
     res.json(allPost);
   } catch (error) {
     res.status(500).json({ message: error.message });
