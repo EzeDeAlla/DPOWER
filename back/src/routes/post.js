@@ -17,14 +17,13 @@ router.get('', async (req, res) => {
           // || POST /POST || //
 router.post('', async (req, res) => {
   try {
-    const { likes, powersGained, multimedia, description, id } = req.body;
-    if ((likes && powersGained, multimedia, description, id)) {
+    const { likes, powersGained, multimedia, description} = req.body;
+    if ((likes && powersGained, multimedia, description)) {
       const newPost = await Post.create({
         likes,
         powersGained,
         multimedia,
         description,
-        id,
       });
       res.json(newPost);
     } else {
@@ -33,6 +32,7 @@ router.post('', async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+          // | AGREGAR RELACION CON USERID | //
 });
 
 

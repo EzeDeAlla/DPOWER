@@ -24,10 +24,9 @@ router.post('', async (req, res) => {
     const user = await UserInfo.findOne({
       where: { mail },
     });
-    if (id && name && sport && nationality && username && mail && powers && validated) {
+    if (name && sport && nationality && username && mail && powers && validated) {
       if (!user) {
         const newUser = await UserInfo.create({
-          id,
           name,
           sport,
           age,
@@ -49,15 +48,6 @@ router.post('', async (req, res) => {
   }
 });
 
-          // || USUARIOS API EXTERNA || //
-// router.get('', async (req, res) => {
-//   try {
-//     let users = await infoUser();
-//     res.status(200).send(users);
-//   } catch (error) {
-//     res.status(400).send(error);
-//   }
-// });
 
           // || USUARIOS BASE DE DATOS NUESTRA || //
 router.get('', async (req, res) => {
@@ -71,7 +61,6 @@ router.get('', async (req, res) => {
 });
 
           // || USUARIOS/:ID BASE DE DATOS NUESTRA || //
-
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
   const user = await UserInfo.findByPk(id);

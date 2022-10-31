@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const axios = require('axios');
-const { allProducts, dbData, todaInfo } = require('../controllers');
+const { todaInfo } = require('../controllers');
 const { Product } = require('../db');
 
 
@@ -32,16 +32,16 @@ router.get('/:id', async (req, res) => {
           // || POST /PRODUCTOS || //
 router.post('', async (req, res) => {
   try {
-    const { id, name, category, price, stock, published } = req.body;
+    const { name, category, price, stock, published, image } = req.body;
 
-    if (id && name && category && price && stock && published) {
+    if (name && category && price && stock && published) {
       const newProduct = await Product.create({
-        id,
         name,
         category,
         price,
         stock,
         published,
+        image,
       });
 
       res.json(newProduct);
@@ -74,13 +74,14 @@ router.delete('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, stock, category, price } = req.body;
+    const { name, stock, category, price, image } = req.body;
 
     const product = await Product.findByPk(id);
     product.name = name;
     product.stock = stock;
     product.category = category;
     product.price = price;
+    product.image = image;
 
     await product.save();
 
