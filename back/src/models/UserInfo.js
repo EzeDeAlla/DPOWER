@@ -18,20 +18,17 @@ module.exports = (sequelize) => {
     },
     sport: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     age: {
       type: DataTypes.INTEGER,
     },
     nationality: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM,
       allowNull: false,
     },
     description: {
       type: DataTypes.STRING
-    },
-    post: {  // How many posts has the user published
-      type: DataTypes.INTEGER,
     },
     username: {
       type: DataTypes.STRING,
@@ -46,7 +43,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     validated: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BOOLEAN,
       allowNull: false
     }
   })
