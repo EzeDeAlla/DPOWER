@@ -1,9 +1,10 @@
 const { Router } = require('express');
 const router = Router();
 const axios = require('axios');
-const { allProducts, dbData, todaInfo } = require('../controllers');
+const { todaInfo } = require('../controllers');
 const { Product } = require('../db');
 
+// || /PRODUCTOS || //
 router.get('', async (req, res) => {
   try {
     const products = await todaInfo();
@@ -13,6 +14,7 @@ router.get('', async (req, res) => {
   }
 });
 
+// || /PRODUCTOS/:ID || //
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
   const products = await todaInfo();
@@ -24,18 +26,19 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// || POST /PRODUCTOS || //
 router.post('', async (req, res) => {
   try {
-    const { id, name, category, price, stock, published } = req.body;
+    const { name, category, price, stock, published, image } = req.body;
 
-    if (id && name && category && price && stock && published) {
+    if (name && category && price && stock && published) {
       const newProduct = await Product.create({
-        id,
         name,
         category,
         price,
         stock,
         published,
+        image,
       });
 
       res.json(newProduct);
@@ -47,6 +50,7 @@ router.post('', async (req, res) => {
   }
 });
 
+// || DELETE /PRODUCTOS || //
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -66,16 +70,18 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// || PUT /PRODUCTOS || //
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, stock, category, price } = req.body;
+    const { name, stock, category, price, image } = req.body;
 
     const product = await Product.findByPk(id);
     product.name = name;
     product.stock = stock;
     product.category = category;
     product.price = price;
+    product.image = image;
 
     await product.save();
 

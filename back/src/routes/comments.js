@@ -2,12 +2,13 @@ const { Router } = require('express');
 const router = Router();
 const { Comment } = require('../db');
 
+
+          // || POST /COMENTARIOS || //
 router.post('', async (req, res) => {
   try {
-    const { id, content } = req.body;
-    if (id && content) {
+    const { content } = req.body;
+    if (content) {
       const newComment = await Comment.create({
-        id,
         content,
       });
       res.json(newComment);
@@ -17,8 +18,12 @@ router.post('', async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+          // | AGREGAR RELACION USER | //
+          // | AGREGAR RELACION CON EL POST | //
 });
 
+
+          // || DELETE /COMENTARIOS || //
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;

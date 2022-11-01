@@ -2,26 +2,28 @@ const { Router } = require('express');
 const router = Router();
 const { Post } = require('../db');
 
+
+          // || /POST || //
 router.get('', async (req, res) => {
   try {
     const allPost = await Post.findAll();
-
     res.json(allPost);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
+
+          // || POST /POST || //
 router.post('', async (req, res) => {
   try {
-    const { likes, powersGained, multimedia, description, id } = req.body;
-    if ((likes && powersGained, multimedia, description, id)) {
+    const { likes, powersGained, multimedia, description} = req.body;
+    if ((likes && powersGained, multimedia, description)) {
       const newPost = await Post.create({
         likes,
         powersGained,
         multimedia,
         description,
-        id,
       });
       res.json(newPost);
     } else {
@@ -30,8 +32,11 @@ router.post('', async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+          // | AGREGAR RELACION CON USERID | //
 });
 
+
+          // || DELETE /POST || //
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -51,6 +56,8 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+
+          // || PUT /POST || //
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;

@@ -21,7 +21,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     price: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
     stock: {
@@ -31,6 +31,11 @@ module.exports = (sequelize) => {
     published: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_.jpg'
     }
   })
 };

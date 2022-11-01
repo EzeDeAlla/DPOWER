@@ -4,6 +4,7 @@ const axios = require('axios');
 const { allUsers, infoUser } = require('../controllers');
 const { UserInfo } = require('../db');
 
+// | POST USUARIOS | //
 router.post('', async (req, res) => {
   try {
     const {
@@ -22,10 +23,9 @@ router.post('', async (req, res) => {
     const user = await UserInfo.findOne({
       where: { mail },
     });
-    if (id && name && sport && nationality && username && mail && powers && validated) {
+    if (name && sport && nationality && username && mail && powers && validated) {
       if (!user) {
         const newUser = await UserInfo.create({
-          id,
           name,
           sport,
           age,
@@ -47,6 +47,7 @@ router.post('', async (req, res) => {
   }
 });
 
+// || USUARIOS BASE DE DATOS NUESTRA || //
 router.get('', async (req, res) => {
   try {
     const allUsers = await UserInfo.findAll();
@@ -57,6 +58,7 @@ router.get('', async (req, res) => {
   }
 });
 
+// || USUARIOS/:ID BASE DE DATOS NUESTRA || //
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
   const user = await UserInfo.findByPk(id);
@@ -64,6 +66,7 @@ router.get('/:id', async (req, res) => {
   res.json(user);
 });
 
+// || PUT USUARIOS || //
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
