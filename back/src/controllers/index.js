@@ -74,7 +74,6 @@ const allUsers = async () => {
 };
 
 module.exports = {
-  allProducts,
   allUsers,
   dbData,
   todaInfo,
