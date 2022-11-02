@@ -9,7 +9,6 @@ const { UserInfo } = require('../db');
 router.post('', async (req, res) => {
   try {
     const {
-      id,
       name,
       sport,
       age,
@@ -62,10 +61,14 @@ router.get('', async (req, res) => {
 
           // || USUARIOS/:ID BASE DE DATOS NUESTRA || //
 router.get('/:id', async (req, res) => {
+  try{
   const id = req.params.id;
   const user = await UserInfo.findByPk(id);
 
-  res.json(user);
+  res.status(200).json(user);
+} catch(error){
+  res.status(500).send(error);
+}
 });
 
 

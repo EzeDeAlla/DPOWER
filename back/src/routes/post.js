@@ -57,7 +57,7 @@ router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { likes, multimedia, description, powersGained } = req.body;
-
+// | SE PUEDE MODIFICAR SOLO LOS LIKES PERO TENEMOS QUE PONER LO OTRO AUNQUE NO LO MODIFIQUEMOS(SI NO, ES NULL)
     const postUpdate = await Post.findByPk(id);
     postUpdate.likes = likes;
     postUpdate.multimedia = multimedia;
