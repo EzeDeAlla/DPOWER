@@ -24,19 +24,19 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
     },
     nationality: {
-      type: DataTypes.ENUM,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     username: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     mail: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     powers: {
       type: DataTypes.INTEGER,
@@ -44,7 +44,7 @@ module.exports = (sequelize) => {
     },
     validated: {
       type: DataTypes.BOOLEAN,
-      allowNull: false
-    }
-  })
+      allowNull: false,
+    },
+  });
 };

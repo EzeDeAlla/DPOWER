@@ -7,19 +7,8 @@ const { UserInfo } = require('../db');
 // | POST USUARIOS | //
 router.post('', async (req, res) => {
   try {
-    const {
-      id,
-      name,
-      sport,
-      age,
-      nationality,
-      description,
-      post,
-      username,
-      mail,
-      powers,
-      validated,
-    } = req.body;
+    const { name, sport, age, nationality, description, post, username, mail, powers, validated } =
+      req.body;
     const user = await UserInfo.findOne({
       where: { mail },
     });

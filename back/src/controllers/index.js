@@ -2,7 +2,7 @@ require('dotenv').config();
 const axios = require('axios');
 const router = require('../routes');
 const { Product, Order } = require('../db');
-          // | TRAE LA INFO DE LA FAKESTOREAPI | //
+// | TRAE LA INFO DE LA FAKESTOREAPI | //
 // const allProducts = async () => {
 //   const apiProducts = await axios.get(`https://fakestoreapi.com/products`);
 //   const allProductsMap = await apiProducts.data.map((e) => ({
@@ -34,7 +34,7 @@ const dbData = async () => {
 };
 
 const todaInfo = async () => {
-  const allInfo = dbData()
+  const allInfo = dbData();
   return allInfo;
 };
 
@@ -74,7 +74,6 @@ const allUsers = async () => {
 };
 
 module.exports = {
-  allProducts,
   allUsers,
   dbData,
   todaInfo,
