@@ -22,7 +22,7 @@ router.get('/:id', async (req, res) => {
 router.post('', async (req, res) => {
   try {
     const { content, PostId, UserInfoId } = req.body;
-    if (content) {
+    if ((content, PostId, UserInfoId)) {
       const newComment = await Comment.create({
         content,
         PostId,
