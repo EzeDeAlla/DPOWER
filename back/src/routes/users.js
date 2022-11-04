@@ -49,10 +49,14 @@ router.get('', async (req, res) => {
 
 // || USUARIOS/:ID BASE DE DATOS NUESTRA || //
 router.get('/:id', async (req, res) => {
-  const id = req.params.id;
-  const user = await UserInfo.findByPk(id);
+  try {
+    const id = req.params.id;
+    const user = await UserInfo.findByPk(id);
 
-  res.json(user);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).send(error);
+  }
 });
 
 // || PUT USUARIOS || //

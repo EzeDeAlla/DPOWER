@@ -72,15 +72,32 @@ router.delete('/:id', async (req, res) => {
 });
 
 // || PUT /POST || //
+// || MODIFICA TODO EL POST O SOLO ALGO PERO HAY QUE PONER TODO || //
+// router.put('/:id', async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const { likes, multimedia, description, powersGained } = req.body;
+//     const postUpdate = await Post.findByPk(id);
+//     postUpdate.likes = likes;
+//     postUpdate.multimedia = multimedia;
+//     postUpdate.description = description;
+//     postUpdate.powersGained = powersGained;
+
+//     await postUpdate.save();
+
+//     res.json(postUpdate);
+//   } catch (error) {
+//     res.status(500).send({ message: error.message });
+//   }
+// });
+
+// || MOFICIA SOLO LOS LIKES Y LOS POWERS || //
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { likes, multimedia, description, powersGained } = req.body;
-
+    const { likes, powersGained } = req.body;
     const postUpdate = await Post.findByPk(id);
     postUpdate.likes = likes;
-    postUpdate.multimedia = multimedia;
-    postUpdate.description = description;
     postUpdate.powersGained = powersGained;
 
     await postUpdate.save();

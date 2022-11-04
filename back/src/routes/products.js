@@ -16,6 +16,7 @@ router.get('', async (req, res) => {
 
 // || /PRODUCTOS/:ID || //
 router.get('/:id', async (req, res) => {
+  try{
   const id = req.params.id;
   const products = await todaInfo();
   if (id) {
@@ -24,14 +25,17 @@ router.get('/:id', async (req, res) => {
       ? res.status(200).send(filterId)
       : res.status(400).send('Id de producto no encontrada');
   }
+    } catch(error){
+      res.status(500).send(error); 
+  }
 });
 
 // || POST /PRODUCTOS || //
 router.post('', async (req, res) => {
   try {
-    const { name, category, price, stock, published, image } = req.body;
+    const { name, category, price, stock, published, image, description } = req.body;
 
-    if (name && category && price && stock && published) {
+    if (name && category && price && stock && published && description) {
       const newProduct = await Product.create({
         name,
         category,
@@ -39,6 +43,7 @@ router.post('', async (req, res) => {
         stock,
         published,
         image,
+        description,
       });
 
       res.json(newProduct);
