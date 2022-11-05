@@ -9,6 +9,7 @@ const { UserInfo } = require('../db');
 router.post('', async (req, res) => {
   try {
     const {
+      id,
       name,
       sport,
       age,
@@ -21,11 +22,12 @@ router.post('', async (req, res) => {
       validated,
     } = req.body;
     const user = await UserInfo.findOne({
-      where: { mail },
+      where: { id },
     });
-    if (name && sport && nationality && username && mail && powers && validated) {
+    if (name && sport && nationality && username && mail ) {
       if (!user) {
         const newUser = await UserInfo.create({
+          id,
           name,
           sport,
           age,

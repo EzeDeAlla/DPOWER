@@ -7,10 +7,8 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-
       unique: true,
       primaryKey: true,
-      autoIncrement: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -41,10 +39,12 @@ module.exports = (sequelize) => {
     powers: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 0
     },
     validated: {
       type: DataTypes.BOOLEAN,
-      allowNull: false
+      allowNull: false,
+      defaultValue: false
     }
   })
 };
