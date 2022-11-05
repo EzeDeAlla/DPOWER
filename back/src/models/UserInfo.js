@@ -34,7 +34,8 @@ module.exports = (sequelize) => {
     },
     mail: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
     powers: {
       type: DataTypes.INTEGER,

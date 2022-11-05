@@ -15,23 +15,21 @@ router.post('', async (req, res) => {
       username,
       avatar
     } = req.body;
+    if (!name || !username || !mail) throw new Error('Missing params required')
     const user = await UserInfo.findOne({
       where: { id },
     });
-    if (name && username && mail ) {
-      if (!user) {
-        const newUser = await UserInfo.create({
-          id,
-          name,
-          mail,
-          username,
-          avatar
-        });
-        res.json(newUser);
-      } else {
-        throw new Error('user already exists');
-      }
+    if (!user) {
+      const newUser = await UserInfo.create({
+        id,
+        name,
+        mail,
+        username,
+        avatar
+      });
+      return res.json(newUser);
     }
+    res.send('El usuario ya existe')
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
