@@ -24,6 +24,10 @@ module.exports = (sequelize) => {
       type: DataTypes.FLOAT,
       allowNull: false,
     },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
     stock: {
       type: DataTypes.INTEGER,
       allowNull: false,
