@@ -30,13 +30,11 @@ module.exports = (sequelize) => {
     },
     username: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
+      allowNull: false
     },
     mail: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
+      allowNull: false
     },
     powers: {
       type: DataTypes.INTEGER,
