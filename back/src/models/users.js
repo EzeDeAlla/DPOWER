@@ -13,11 +13,6 @@ module.exports = (sequelize) => {
     level: {
       type: DataTypes.INTEGER,
       allowNull: false
-    },
-    avatar: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: 'https://ibb.co/vxdbDGJ'
     }
   });
 };

@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
     },
     nationality: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: true,
     },
     description: {
       type: DataTypes.STRING
@@ -45,6 +45,11 @@ module.exports = (sequelize) => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false,
+    },
+    avatar: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      defaultValue: 'https://ibb.co/vxdbDGJ'
     }
   })
 };

@@ -11,33 +11,21 @@ router.post('', async (req, res) => {
     const {
       id,
       name,
-      sport,
-      age,
-      nationality,
-      description,
-      post,
-      username,
       mail,
-      powers,
-      validated,
+      username,
+      avatar
     } = req.body;
     const user = await UserInfo.findOne({
       where: { id },
     });
-    if (name && sport && nationality && username && mail ) {
+    if (name && username && mail ) {
       if (!user) {
         const newUser = await UserInfo.create({
           id,
           name,
-          sport,
-          age,
-          nationality,
-          description,
-          post,
-          username,
           mail,
-          powers,
-          validated,
+          username,
+          avatar
         });
         res.json(newUser);
       } else {
