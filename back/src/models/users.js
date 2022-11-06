@@ -7,19 +7,12 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-
       unique: true,
       primaryKey: true,
-      autoIncrement: true,
     },
     level: {
       type: DataTypes.INTEGER,
       allowNull: false
-    },
-    avatar: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: 'https://ibb.co/vxdbDGJ'
     }
   });
 };

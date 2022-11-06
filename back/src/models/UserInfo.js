@@ -7,10 +7,8 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-
       unique: true,
       primaryKey: true,
-      autoIncrement: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -25,7 +23,7 @@ module.exports = (sequelize) => {
     },
     nationality: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: true,
     },
     description: {
       type: DataTypes.STRING,
@@ -37,14 +35,22 @@ module.exports = (sequelize) => {
     mail: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     powers: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 0,
     },
     validated: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
+      defaultValue: false,
+    },
+    avatar: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      defaultValue: 'https://ibb.co/vxdbDGJ',
     },
   });
 };
