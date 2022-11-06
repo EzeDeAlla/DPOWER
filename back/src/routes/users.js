@@ -56,24 +56,20 @@ router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const {
-      powers,
       name,
       sport,
       age,
       nationality,
       description,
-      validated,
       avatar,
     } = req.body;
 
     const user = await UserInfo.findByPk(id);
-    user.powers = powers;
     user.name = name;
     user.sport = sport;
     user.age = age;
     user.nationality = nationality;
     user.description = description;
-    user.validated = validated;
     user.avatar = avatar;
 
     await user.save();
