@@ -54,8 +54,8 @@ router.get('/:id', async (req, res) => {
 // || PUT USUARIOS || //
 router.put('/:id', async (req, res) => {
   try {
+    const { id } = req.params;
     const {
-      id,
       name,
       sport,
       age,
