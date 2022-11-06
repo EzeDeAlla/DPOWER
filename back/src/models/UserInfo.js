@@ -26,21 +26,21 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     description: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     username: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     mail: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
     },
     powers: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 0
+      defaultValue: 0,
     },
     validated: {
       type: DataTypes.BOOLEAN,
@@ -50,7 +50,7 @@ module.exports = (sequelize) => {
     avatar: {
       type: DataTypes.TEXT,
       allowNull: false,
-      defaultValue: 'https://ibb.co/vxdbDGJ'
-    }
-  })
+      defaultValue: 'https://ibb.co/vxdbDGJ',
+    },
+  });
 };

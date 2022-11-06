@@ -4,9 +4,7 @@ const axios = require('axios');
 const { todaInfo } = require('../controllers');
 const { Product } = require('../db');
 
-
-
-          // || /PRODUCTOS || //
+// || /PRODUCTOS || //
 router.get('', async (req, res) => {
   try {
     const products = await todaInfo();
@@ -16,7 +14,7 @@ router.get('', async (req, res) => {
   }
 });
 
-          // || /PRODUCTOS/:ID || //
+// || /PRODUCTOS/:ID || //
 router.get('/:id', async (req, res) => {
   try{
   const id = req.params.id;
@@ -32,8 +30,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-
-          // || POST /PRODUCTOS || //
+// || POST /PRODUCTOS || //
 router.post('', async (req, res) => {
   try {
     const { name, category, price, stock, published, image, description } = req.body;
@@ -58,24 +55,27 @@ router.post('', async (req, res) => {
   }
 });
 
-
-          // || DELETE /PRODUCTOS || //
+// || DELETE /PRODUCTOS || //
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    await Product.destroy({
-      where: {
-        id,
-      },
-    });
-    res.sendStatus(204);
+    const product = await Product.findByPk(id);
+    if (product !== null) {
+      await Product.destroy({
+        where: {
+          id,
+        },
+      });
+      res.sendStatus(204);
+    } else {
+      throw new Error('the id does not exist');
+    }
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 });
 
-
-          // || PUT /PRODUCTOS || //
+// || PUT /PRODUCTOS || //
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;

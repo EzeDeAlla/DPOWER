@@ -1,15 +1,32 @@
 const { Router } = require('express');
 const router = Router();
-const { Comment } = require('../db');
+const { Comment, UserInfo, Post } = require('../db');
 
+router.get('/:id', async (req, res) => {
+  const id = req.params.id;
+  const comment = await Comment.findByPk(id);
+  const idUser = comment.UserInfoId;
+  const commentWithUser = await Comment.findByPk(id, {
+    include: {
+      model: UserInfo,
+      attributes: ['name'],
+      where: {
+        id: idUser,
+      },
+    },
+  });
+  res.json(commentWithUser);
+});
 
-          // || POST /COMENTARIOS || //
+// || POST /COMENTARIOS || //
 router.post('', async (req, res) => {
   try {
-    const { content } = req.body;
-    if (content) {
+    const { content, PostId, UserInfoId } = req.body;
+    if ((content, PostId, UserInfoId)) {
       const newComment = await Comment.create({
         content,
+        PostId,
+        UserInfoId,
       });
       res.json(newComment);
     } else {
@@ -18,21 +35,25 @@ router.post('', async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-          // | AGREGAR RELACION USER | //
-          // | AGREGAR RELACION CON EL POST | //
+  // | AGREGAR RELACION USER | //
+  // | AGREGAR RELACION CON EL POST | //
 });
 
-
-          // || DELETE /COMENTARIOS || //
+// || DELETE /COMENTARIOS || //
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    await Comment.destroy({
-      where: {
-        id,
-      },
-    });
-    res.sendStatus(204);
+    const comment = await Comment.findByPk(id);
+    if (comment !== null) {
+      await Comment.destroy({
+        where: {
+          id,
+        },
+      });
+      res.sendStatus(204);
+    } else {
+      throw new Error('the id does not exist');
+    }
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

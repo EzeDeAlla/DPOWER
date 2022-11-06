@@ -16,17 +16,18 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    powersGained: {  //The total amount of Powers obtained in this post
+    powersGained: {
+      //The total amount of Powers obtained in this post
       type: DataTypes.INTEGER,
       allowNull: false,
     },
     multimedia: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: false,
     },
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-  })
+  });
 };
