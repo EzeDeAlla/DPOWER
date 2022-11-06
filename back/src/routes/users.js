@@ -22,7 +22,7 @@ router.post('', async (req, res) => {
       });
       return res.json(newUser);
     }
-    res.send('El usuario ya existe');
+    res.json(user)
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -62,8 +62,6 @@ router.put('/:id', async (req, res) => {
       age,
       nationality,
       description,
-      username,
-      mail,
       validated,
       avatar,
     } = req.body;
@@ -75,8 +73,6 @@ router.put('/:id', async (req, res) => {
     user.age = age;
     user.nationality = nationality;
     user.description = description;
-    user.username = username;
-    user.mail = mail;
     user.validated = validated;
     user.avatar = avatar;
 
