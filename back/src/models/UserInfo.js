@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('UserInfo', {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       primaryKey: true,
@@ -35,7 +35,6 @@ module.exports = (sequelize) => {
     mail: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
     powers: {
       type: DataTypes.INTEGER,

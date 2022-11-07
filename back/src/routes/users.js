@@ -22,7 +22,7 @@ router.post('', async (req, res) => {
       });
       return res.json(newUser);
     }
-    res.send('El usuario ya existe');
+    res.json(user)
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -56,28 +56,20 @@ router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const {
-      powers,
       name,
       sport,
       age,
       nationality,
       description,
-      username,
-      mail,
-      validated,
       avatar,
     } = req.body;
 
     const user = await UserInfo.findByPk(id);
-    user.powers = powers;
     user.name = name;
     user.sport = sport;
     user.age = age;
     user.nationality = nationality;
     user.description = description;
-    user.username = username;
-    user.mail = mail;
-    user.validated = validated;
     user.avatar = avatar;
 
     await user.save();
