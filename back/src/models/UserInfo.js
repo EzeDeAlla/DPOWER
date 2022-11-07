@@ -39,17 +39,15 @@ module.exports = (sequelize) => {
     powers: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 0,
     },
     validated: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false,
     },
     avatar: {
       type: DataTypes.TEXT,
       allowNull: false,
-      defaultValue: 'https://ibb.co/vxdbDGJ',
+      // defaultValue: 'https://ibb.co/vxdbDGJ',
     },
   });
 };
