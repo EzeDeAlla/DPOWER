@@ -38,15 +38,15 @@ module.exports = (sequelize) => {
     },
     powers: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     validated: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
     },
     avatar: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: true,
       // defaultValue: 'https://ibb.co/vxdbDGJ',
     },
   });
