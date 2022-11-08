@@ -28,7 +28,7 @@ router.post('', async (req, res) => {
   }
 });
 
-// || USUARIOS BASE DE DATOS NUESTRA || //
+// USUARIOS BASE DE DATOS NUESTRA //
 router.get('', async (req, res) => {
   try {
     const allUsers = await UserInfo.findAll();
