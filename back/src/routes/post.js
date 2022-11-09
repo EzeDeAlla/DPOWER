@@ -34,7 +34,7 @@ router.get('/:id', async (req, res) => {
 router.post('', async (req, res) => {
   try {
     const { likes, powersGained, multimedia, description, UserInfoId } = req.body;
-    if (likes && powersGained && multimedia && description && UserInfoId) {
+    if ( multimedia && UserInfoId) {
       const newPost = await Post.create({
         likes,
         powersGained,
