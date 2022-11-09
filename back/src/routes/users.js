@@ -62,6 +62,8 @@ router.put('/:id', async (req, res) => {
       nationality,
       description,
       avatar,
+      validated,
+      powers
     } = req.body;
 
     const user = await UserInfo.findByPk(id);
@@ -71,6 +73,8 @@ router.put('/:id', async (req, res) => {
     user.nationality = nationality;
     user.description = description;
     user.avatar = avatar;
+    user.validated = validated;
+    user.powers = powers;
 
     await user.save();
 
