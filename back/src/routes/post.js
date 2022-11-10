@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router = Router();
-const { Post, UserInfo } = require('../db');
+const { Post, UserInfo, Comment } = require('../db');
 // const UserInfo = require('../models/UserInfo');
 
 // || /POST || //
