@@ -7,7 +7,27 @@ const { Post, UserInfo, Comment } = require('../db');
 router.get('', async (req, res) => {
   try {
     const allPost = await Post.findAll();
-    res.json(allPost);
+    const post = await Post.findByPk(id);
+    const idUser = post.UserInfoId;
+    const idComment = Comment.id;
+    const postWithUser = await Post.findByPk(id, {
+      include: {
+        model: UserInfo,
+        attributes: ['name', 'id', 'validated'],
+        where: {
+          id: idUser,
+        },
+      },
+      include: {
+        model: Comment,
+        attributes: ['content'],
+        where: {
+          id: idComment,
+        },
+      },
+    });
+    const all = allPost.concat(postWithUser);
+    res.json(all);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -30,7 +50,7 @@ router.get('/:id', async (req, res) => {
       model: Comment,
       attributes: ['content'],
       where: {
-        id: idUser,
+        id: idComment,
       },
     },
   });
