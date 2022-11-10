@@ -4,7 +4,7 @@ const router = Router();
 const { Comment } = require('../db');
 
 
-// || GET /COMMENTS || //
+// || GET /COMMENTS || // asd
 router.get('', async (req, res) => {
   try{
     const comments = dbComments;
