@@ -17,7 +17,7 @@ router.get('', async (req, res) => {
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
   const post = await Post.findByPk(id);
-  // const idUser = post.UserInfoId;
+  const idUser = post.UserInfoId;
   const idComment = 1;
   const postWithUser = await Post.findByPk(id, {
     // include: {
