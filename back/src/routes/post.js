@@ -12,20 +12,36 @@ router.get('', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
- // asdasdasdasasdasas
+ // asdasdasdasasdas
 // || POST/:ID || //
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
   const post = await Post.findByPk(id);
   const idUser = post.UserInfoId;
+  const idComment = Comment.id;
   const postWithUser = await Post.findByPk(id, {
-    include: {
+    // include: {
+    //   model: UserInfo,
+    //   attributes: ['name', 'id', 'validated'],
+    //   where: {
+    //     id: idUser,
+    //   },
+    // },
+    include: [{
+      model: Comment,
+      where: { id: 1 }
+  }, {
       model: UserInfo,
       attributes: ['name', 'id', 'validated'],
-      where: {
-        id: idUser,
-      },
-    },
+      where: { id: idUser }
+  }],
+    // include: {
+    //   model: Comment,
+    //   attributes: ['content',],
+    //   where: {
+    //     id: 3,
+    //   },
+    // },
   });
   res.json(postWithUser);
 });

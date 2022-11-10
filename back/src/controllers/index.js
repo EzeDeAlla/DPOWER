@@ -36,7 +36,7 @@ const dbData = async () => {
 
 const dbComments = async() => {
   try{
-    const dbComments = await Comment.findall({
+    const dbComments = await Comment.findAll({
       include: {
         model: UserInfo,
         attributes: ['id'],
