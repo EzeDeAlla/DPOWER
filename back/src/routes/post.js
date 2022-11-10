@@ -29,7 +29,7 @@ router.get('/:id', async (req, res) => {
 
     {
       model: UserInfo,
-      attributes: ['validate'],
+      attributes: ['name', 'validated'],
       where: {
         id: idUser,
       },
