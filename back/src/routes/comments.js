@@ -7,7 +7,7 @@ const { Comment } = require('../db');
 // || GET /COMMENTS || // asd
 router.get('', async (req, res) => {
   try{
-    const comments = dbComments();
+    const comments = await dbComments();
     res.status(200).send(comments)
   } catch (error) {
     res.status(400).send(error);
