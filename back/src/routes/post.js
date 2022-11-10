@@ -12,14 +12,12 @@ router.get('', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
- // asdasdasdasasdas
-// || POST/:ID || // asdas das
+ // asdasdasdasasdasas
+// || POST/:ID || //
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
   const post = await Post.findByPk(id);
   const idUser = post.UserInfoId;
-  // const idcomment = Comment.findAll({where: {PostId: id}})
-  // const idComment = idcomment.PostId;
   const postWithUser = await Post.findByPk(id, {
     include: {
       model: UserInfo,
@@ -32,7 +30,7 @@ router.get('/:id', async (req, res) => {
   res.json(postWithUser);
 });
 
-// || POST /POST || // asdasd
+// || POST /POST || //
 router.post('', async (req, res) => {
   try {
     const { likes, powersGained, multimedia, description, UserInfoId } = req.body;
