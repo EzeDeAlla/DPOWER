@@ -32,7 +32,7 @@ router.get('/:id', async (req, res) => {
       model: Comment,
       attributes: ['content'],
       where: {
-        PostId: id,
+        id: 1,
       },
     },
   });
