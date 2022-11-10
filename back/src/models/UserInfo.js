@@ -40,6 +40,10 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
+    solicitud: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
     validated: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
