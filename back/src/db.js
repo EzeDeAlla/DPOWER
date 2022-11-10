@@ -64,7 +64,6 @@ UserInfo.belongsToMany(UserInfo, {
 
 User.belongsTo(UserInfo);
 Post.belongsTo(UserInfo);
-Post.hasMany(Comment);
 Comment.belongsTo(Post);
 Comment.belongsTo(UserInfo);
 Order.belongsTo(UserInfo);

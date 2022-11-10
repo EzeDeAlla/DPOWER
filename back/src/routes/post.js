@@ -17,31 +17,23 @@ router.get('', async (req, res) => {
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
   const post = await Post.findByPk(id);
-  const idUser = 1;
-  const idComment = 1;
+  const idUser = post.UserInfoId;
   const postWithUser = await Post.findByPk(id, {
-    // include: {
-    //   model: UserInfo,
-    //   attributes: [],
-    //   where: {
-    //     id: idUser,
-    //   },
-    // },
     include: [{
       model: Comment,
-      where: { id: idComment }
-  }, {
+      attributes: ['content'],
+      where: {
+        PostId: id,
+      },
+    }, 
+
+    {
       model: UserInfo,
-      attributes: ['name', 'id', 'validated'],
-      where: { id: idUser }
-  }],
-    // include: {
-    //   model: Comment,
-    //   attributes: ['content'],
-    //   where: {
-    //     id: idComment,
-    //   },
-    // },
+      attributes: ['name'],
+      where: {
+        id: idUser,
+      },
+    }, ],
   });
   res.json(postWithUser);
 });
