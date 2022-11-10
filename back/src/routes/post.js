@@ -22,7 +22,7 @@ router.get('/:id', async (req, res) => {
   const postWithUser = await Post.findByPk(id, {
     include: {
       model: UserInfo,
-      attributes: ['name', 'id', 'validated'],
+      attributes: [],
       where: {
         id: idUser,
       },
