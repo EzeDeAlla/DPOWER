@@ -36,15 +36,7 @@ const dbData = async () => {
 
 const dbComments = async() => {
   try{
-    const dbComments = await Comment.findAll({
-      include: {
-        model: UserInfo,
-        attributes: ['id'],
-        through:{
-          attributes: [],
-        },
-      },
-    });
+    const dbComments = await Comment.findAll();
     return dbComments;
   } catch {
     return 'No created comments founded'
