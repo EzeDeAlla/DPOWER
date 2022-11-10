@@ -39,7 +39,7 @@ router.get('/:id', async (req, res) => {
   res.json(postWithUser);
 });
 
-// || POST /POST || //
+// || POST /POST || // asdasd
 router.post('', async (req, res) => {
   try {
     const { likes, powersGained, multimedia, description, UserInfoId } = req.body;
