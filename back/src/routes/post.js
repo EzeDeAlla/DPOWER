@@ -13,7 +13,7 @@ router.get('', async (req, res) => {
   }
 });
  // asdasdasdasasdas
-// || POST/:ID || //
+// || POST/:ID || // asdas das
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
   const post = await Post.findByPk(id);
