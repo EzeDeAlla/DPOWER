@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const { dbComments } = require('../controllers');
 const router = Router();
 const { Comment } = require('../db');
 
@@ -14,7 +15,7 @@ router.get('', async (req, res) => {
 });
 
 
-
+// asdasdas
           // || POST /COMENTARIOS || //
 router.post('', async (req, res) => {
   try {
@@ -22,6 +23,13 @@ router.post('', async (req, res) => {
     if (content) {
       const newComment = await Comment.create({
         content,
+        include: {
+          model: UserInfo,
+          attributes: ['name', 'id',],
+          where: {
+            id: idUser,
+          },
+        },
         include: {
           model: Post,
           attributes: ['id'],
