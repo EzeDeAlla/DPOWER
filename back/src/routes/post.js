@@ -28,13 +28,6 @@ router.get('/:id', async (req, res) => {
         id: idUser,
       },
     },
-    include: {
-      model: Comment,
-      attributes: ['content'],
-      where: {
-        id: 1,
-      },
-    },
   });
   res.json(postWithUser);
 });
