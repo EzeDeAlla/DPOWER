@@ -27,21 +27,21 @@ router.get('/:id', async (req, res) => {
     //     id: idUser,
     //   },
     // },
-    include: [{
+  //   include: [{
+  //     model: Comment,
+  //     where: { id: 1 }
+  // }, {
+  //     model: UserInfo,
+  //     attributes: ['name', 'id', 'validated'],
+  //     where: { id: idUser }
+  // }],
+    include: {
       model: Comment,
-      where: { id: 1 }
-  }, {
-      model: UserInfo,
-      attributes: ['name', 'id', 'validated'],
-      where: { id: idUser }
-  }],
-    // include: {
-    //   model: Comment,
-    //   attributes: ['content',],
-    //   where: {
-    //     id: 3,
-    //   },
-    // },
+      attributes: ['content'],
+      where: {
+        id: idComment,
+      },
+    },
   });
   res.json(postWithUser);
 });
