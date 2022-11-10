@@ -38,8 +38,8 @@ const dbComments = async() => {
   try{
     const dbComments = await Comment.findAll();
     return dbComments;
-  } catch {
-    return 'No created comments founded'
+  } catch (error){
+    return (error)
   }
 };
 
