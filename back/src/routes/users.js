@@ -39,12 +39,11 @@ router.get('', async (req, res) => {
   }
 });
 
-// || USUARIOS/:ID BASE DE DATOS NUESTRA || //
+// || USUARIOS/:ID BASE DE DATOS NUESTRA || // as
 router.get('/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const user = await UserInfo.findByPk(id);
-
     res.status(200).json(user);
   } catch (error) {
     res.status(500).send(error);
