@@ -20,13 +20,13 @@ router.get('/:id', async (req, res) => {
   const idUser = 1;
   const idComment = 1;
   const postWithUser = await Post.findByPk(id, {
-    include: {
-      model: UserInfo,
-      attributes: [],
-      where: {
-        id: idUser,
-      },
-    },
+    // include: {
+    //   model: UserInfo,
+    //   attributes: [],
+    //   where: {
+    //     id: idUser,
+    //   },
+    // },
   //   include: [{
   //     model: Comment,
   //     where: { id: idComment }
@@ -35,13 +35,13 @@ router.get('/:id', async (req, res) => {
   //     attributes: ['name', 'id', 'validated'],
   //     where: { id: idUser }
   // }],
-    // include: {
-    //   model: Comment,
-    //   attributes: ['content'],
-    //   where: {
-    //     id: idComment,
-    //   },
-    // },
+    include: {
+      model: Comment,
+      attributes: ['content'],
+      where: {
+        id: idComment,
+      },
+    },
   });
   res.json(postWithUser);
 });
