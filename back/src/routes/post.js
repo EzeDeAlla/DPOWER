@@ -52,7 +52,7 @@ router.post('', async (req, res) => {
       });
       res.json(newPost);
     } else {
-      throw new Error('the required data is empty');
+      throw new Error('the required data is empt');
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
