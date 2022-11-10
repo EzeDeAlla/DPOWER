@@ -1,7 +1,7 @@
 require('dotenv').config();
 const axios = require('axios');
 const router = require('../routes');
-const { Product, Order } = require('../db');
+const { Product, Order, Comment } = require('../db');
           // | TRAE LA INFO DE LA FAKESTOREAPI | //
 // const allProducts = async () => {
 //   const apiProducts = await axios.get(`https://fakestoreapi.com/products`);
