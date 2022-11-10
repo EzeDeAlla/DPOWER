@@ -15,28 +15,15 @@ router.get('', async (req, res) => {
 });
 
 
+
 // asdasdas
           // || POST /COMENTARIOS || //
 router.post('', async (req, res) => {
   try {
-    const { content } = req.body;
-    if (content) {
+    const { content, UserInfoId, PostId } = req.body;
+    if (content, UserInfoId, PostId) {
       const newComment = await Comment.create({
-        content,
-        include: {
-          model: UserInfo,
-          attributes: ['name', 'id',],
-          where: {
-            id: idUser,
-          },
-        },
-        include: {
-          model: Post,
-          attributes: ['id'],
-          where: {
-            id,
-          },
-        },
+        content, UserInfoId, PostId,
       });
       res.json(newComment);
     } else {
