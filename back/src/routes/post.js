@@ -13,7 +13,7 @@ router.get('', async (req, res) => {
   }
 });
 
-// para traer toda la tabla de union entre likes y post likeados
+// para traer toda la tabla de union entre likes y post likeadoss
 router.get('/likes', async (req, res) => {
   try {
     const allLikesForPost = await LikesForPost.findAll();
@@ -33,7 +33,7 @@ router.get('/likes/:PostId', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
- // asdasdasdasasdasasdasasdasdsasdasdasdas
+ // asdasdasdasasdasasdasasdasdsasdasdasdasvvvvv
 // || POST/:ID || //
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
