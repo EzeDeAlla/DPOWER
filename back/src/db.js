@@ -9,7 +9,7 @@ const { userInfo } = require('os');
 
 const { PGHOST, PGUSER, PGPASSWORD, PGPORT } = process.env;
 
-const sequelize = new Sequelize(`postgres://postgres:y0911985@localhost/postgres`, {
+const sequelize = new Sequelize(`postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}/railway`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
   port: PGPORT,
