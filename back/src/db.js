@@ -9,7 +9,7 @@ const { userInfo } = require('os');
 
 const { PGHOST, PGUSER, PGPASSWORD, PGPORT } = process.env;
 
-const sequelize = new Sequelize(`postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}/railway`, {
+const sequelize = new Sequelize(`postgres://postgres:y0911985@localhost/postgres`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
   port: PGPORT,
@@ -50,7 +50,7 @@ const { Comment, Order, Post, Product, UserInfo, User } = sequelize.models;
 //   otherKey: 'FollowerId',
 //   as: 'subUserInfor',
 // });
-
+// relacion muchos a muchos para los usuarios poder seguir a otros usuarios
 UserInfo.belongsToMany(UserInfo, {
   as: 'follower',
   foreignKey: 'userToFollowId',
@@ -61,6 +61,21 @@ UserInfo.belongsToMany(UserInfo, {
   foreignKey: 'followerId',
   through: 'UserInfoFavorites',
 });
+
+// relacion muchos a muchos para los post y usuarios (controlar los likes) 
+UserInfo.belongsToMany(Post, {through: 'LikesForPost'})
+Post.belongsToMany(UserInfo, {through: 'LikesForPost'})
+
+// UserInfo.belongsToMany(Post, {
+//   as: 'viewer',
+//   foreignKey: 'postToLikeId',
+//   through: 'LikesForPost',
+// });
+// Post.belongsToMany(UserInfo, {
+//   as: 'postToLike',
+//   foreignKey: 'viewerId',
+//   through: 'LikesForPost',
+// });
 
 User.belongsTo(UserInfo);
 Post.belongsTo(UserInfo);
