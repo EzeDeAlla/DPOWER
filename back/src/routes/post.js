@@ -36,25 +36,29 @@ router.get('/likes/:PostId', async (req, res) => {
  // asdasdasdasasdasasdasasdasdsasdasdasdasvvvvvsss
 // || POST/:ID || //
 router.get('/:id', async (req, res) => {
+  try {
     const id = req.params.id;
     const post = await Post.findByPk(id);
     const idUser = post.UserInfoId;
-    if (idUser) {
+    if (idUser && post) {
       const postWithUser = await Post.findByPk(id,
         {
           include:
-              {
-                model: Comment,
-                where: {
-                  PostId: id,
-                }
-              }
-            ,
+          {
+            model: Comment,
+            where: {
+              PostId: id,
+            }
+          }
+          ,
         }
       );
       res.json(postWithUser);
     }
-  });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
  // a
 // || POST /POST || //
 router.post('', async (req, res) => {
