@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router = Router();
-const { Post, UserInfo, Comment } = require('../db');
+const { Post, UserInfo, Comment, LikesForPost } = require('../db');
 // const UserInfo = require('../models/UserInfo');
 
 // || /POST || //
@@ -8,6 +8,27 @@ router.get('', async (req, res) => {
   try {
     const allPost = await Post.findAll();
     res.json(allPost);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// para traer toda la tabla de union entre likes y post likeados
+router.get('/likes', async (req, res) => {
+  try {
+    const allLikesForPost = await LikesForPost.findAll();
+    res.json(allLikesForPost);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
+router.get('/likes/:PostId', async (req, res) => {
+  try {
+    let { PostId } = req.params
+    const allLikesForPost = await LikesForPost.findAll({where: {PostId: PostId}});
+    res.json(allLikesForPost);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -58,6 +79,20 @@ router.post('', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+router.post('/likes/:posteoId', async (req, res) => {
+  try {
+    let { posteoId } = req.params
+    let { userId } = req.body
+    const post = await Post.findByPk(posteoId)
+    let usuario = await UserInfo.findByPk(userId)
+    post.addUserInfo(usuario, { through: 'LikesForPost' })
+    return res.json(post)
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+})
 
 // || DELETE /POST || //
 router.delete('/:id', async (req, res) => {
