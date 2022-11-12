@@ -24,10 +24,9 @@ router.get('/likes', async (req, res) => {
 });
 
 // para traer todos los likes de un post y de un usuario
-router.get('/likes/:postId', async (req, res) => {
+router.get('/likes/:postId/:userId', async (req, res) => {
   try {
-    let { postId } = req.params;
-    let { userId } = req.body;
+    let { postId, userId } = req.params;
     if (postId && userId) {
       const allLikesForPost = await LikesForPost.findAll({
         where: {
@@ -45,17 +44,6 @@ router.get('/likes/:postId', async (req, res) => {
   }
 });
 
-
-router.get('/likes/:PostId', async (req, res) => {
-  try {
-    let { PostId } = req.params
-    const allLikesForPost = await LikesForPost.findAll({ where: { PostId: PostId } });
-    res.json(allLikesForPost);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-// asdasdasdasasdasasdasasdasdsasdasdasdasvvvvvsss
 // || POST/:ID || //
 router.get('/:id', async (req, res) => {
   try {
