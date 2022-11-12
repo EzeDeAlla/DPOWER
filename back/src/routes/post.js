@@ -23,24 +23,50 @@ router.get('/likes', async (req, res) => {
   }
 });
 
+// para traer todos los likes de un post y de un usuario
+router.get('/likes/:postId', async (req, res) => {
+  try {
+    let { postId } = req.params;
+    let { userId } = req.body;
+    if (postId && userId) {
+      const allLikesForPost = await LikesForPost.findAll({
+        where: {
+          UserInfoId: userId,
+          PostId: postId
+        }
+      }
+      );
+      res.json(allLikesForPost);
+    } else {
+      throw new Error('the info provided is not enough');
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 
 router.get('/likes/:PostId', async (req, res) => {
   try {
     let { PostId } = req.params
-    const allLikesForPost = await LikesForPost.findAll({where: {PostId: PostId}});
+    const allLikesForPost = await LikesForPost.findAll({ where: { PostId: PostId } });
     res.json(allLikesForPost);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
- // asdasdasdasasdasasdasasdasdsasdasdasdasvvvvvsss
+// asdasdasdasasdasasdasasdasdsasdasdasdasvvvvvsss
 // || POST/:ID || //
 router.get('/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const post = await Post.findByPk(id);
-    const idUser = post.UserInfoId;
-    if (idUser && post) {
+    const commentUser = await Comment.findAll({
+      where: {
+        PostId: id,
+      }
+    });
+    if (post && commentUser.length) {
       const postWithUser = await Post.findByPk(id,
         {
           include:
@@ -54,17 +80,20 @@ router.get('/:id', async (req, res) => {
         }
       );
       res.json(postWithUser);
+    } else if (post) {
+      const postWithUser = await Post.findByPk(id);
+      res.json(postWithUser);
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
- // a
+// a
 // || POST /POST || //
 router.post('', async (req, res) => {
   try {
     const { likes, powersGained, multimedia, description, UserInfoId } = req.body;
-    if ( multimedia && UserInfoId) {
+    if (multimedia && UserInfoId) {
       const newPost = await Post.create({
         likes,
         powersGained,
@@ -115,6 +144,26 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+router.delete('/likes/:posteoId', async (req, res) => {
+  try {
+    let { posteoId } = req.params
+    let { userId } = req.body
+    if (posteoId && userId) {
+      await LikesForPost.destroy({
+        where: {
+          UserInfoId: userId,
+          PostId: posteoId
+        }
+      })
+      res.json('Connection succesful');
+    } else {
+      throw new Error('the info provided is not enough');
+    }
+  }
+  catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
+})
 // || PUT /POST || //
 // || MODIFICA TODO EL POST O SOLO ALGO PERO HAY QUE PONER TODO || //
 // router.put('/:id', async (req, res) => {
