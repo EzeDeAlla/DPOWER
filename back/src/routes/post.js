@@ -13,7 +13,7 @@ router.get('', async (req, res) => {
   }
 });
 
-// para traer toda la tabla de union entre likes y post likeadoss
+// para traer toda la tabla de union entre likes y post likeados
 router.get('/likes', async (req, res) => {
   try {
     const allLikesForPost = await LikesForPost.findAll();
