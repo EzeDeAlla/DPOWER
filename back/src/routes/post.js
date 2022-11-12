@@ -3,7 +3,7 @@ const router = Router();
 const { Post, UserInfo, Comment, LikesForPost } = require('../db');
 // const UserInfo = require('../models/UserInfo');
 
-// || /POST || // pusheando lo mismo que yerson
+// || /POST || // pusheando lo mismo que yerson2
 router.get('', async (req, res) => {
   try {
     const allPost = await Post.findAll();
