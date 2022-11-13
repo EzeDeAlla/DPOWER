@@ -100,7 +100,7 @@ router.post('', async (req, res) => {
 
 router.post('/likes/:posteoId/:userId', async (req, res) => {
   try {
-    let { posteoId, userId } = req.params
+    let { posteoId, userId } = req.params // a ver si ahora si
     const post = await Post.findByPk(posteoId)
     const usuario = await UserInfo.findByPk(userId)
     post.addUserInfo(usuario, { through: 'LikesForPost' })
