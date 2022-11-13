@@ -131,6 +131,8 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// RUTA DELETE
+
 router.delete('/likes/:posteoId/:userId', async (req, res) => {
   try {
     let { posteoId, userId } = req.params
