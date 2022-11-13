@@ -98,12 +98,11 @@ router.post('', async (req, res) => {
   }
 });
 
-router.post('/likes/:posteoId', async (req, res) => {
+router.post('/likes/:posteoId/:userId', async (req, res) => {
   try {
-    let { posteoId } = req.params
-    let { userId } = req.body
+    let { posteoId, userId } = req.params
     const post = await Post.findByPk(posteoId)
-    let usuario = await UserInfo.findByPk(userId)
+    const usuario = await UserInfo.findByPk(userId)
     post.addUserInfo(usuario, { through: 'LikesForPost' })
     return res.json(post)
   }
