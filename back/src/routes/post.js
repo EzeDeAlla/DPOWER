@@ -131,10 +131,9 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-router.delete('/likes/:posteoId', async (req, res) => {
+router.delete('/likes/:posteoId/:userId', async (req, res) => {
   try {
-    let { posteoId } = req.params
-    let { userId } = req.body
+    let { posteoId, userId } = req.params
     if (posteoId && userId) {
       await LikesForPost.destroy({
         where: {
