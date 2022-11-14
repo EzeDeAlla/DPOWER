@@ -1,7 +1,9 @@
 const { Router } = require('express');
+const { default: Stripe } = require('stripe');
 const router = Router();
 const { Post, UserInfo } = require('../db');
 // const UserInfo = require('../models/UserInfo');
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 // || /POST || //
 router.get('', async (req, res) => {
@@ -105,6 +107,24 @@ router.put('/:id', async (req, res) => {
     res.json(postUpdate);
   } catch (error) {
     res.status(500).send({ message: error.message });
+  }
+});
+
+router.post('/pay', async (req, res) => {
+  try {
+    const { name, amount } = req.body;
+    if (!name) return res.status(400).json({ message: 'Porfavor ingresa un nombre' });
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount,
+      currency: 'USD',
+      payment_method_types: ['card'],
+      metadata: { name },
+    });
+    const clientSecret = paymentIntent.client_secret;
+    res.json({ message: 'Pago iniciado', clientSecret });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Error de servicio interno' });
   }
 });
 
