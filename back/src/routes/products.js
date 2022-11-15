@@ -3,6 +3,7 @@ const router = Router();
 const axios = require('axios');
 const { todaInfo } = require('../controllers');
 const { Product } = require('../db');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {apiVersion:"2022-08-01" });
 
 // || /PRODUCTOS || //
 router.get('', async (req, res) => {
@@ -95,5 +96,35 @@ router.put('/:id', async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 });
+
+router.post('/pay', async (req, res) => {
+  try {
+      const customer = await stripe.customers.create();
+const ephemeralKey = await stripe.ephemeralKeys.create(
+  {customer: customer.id},
+  {apiVersion: '2022-08-01'}
+);
+
+const paymentIntent = await stripe.paymentIntents.create({
+  amount: 1099,
+  currency: 'eur',
+  customer: customer.id,
+  automatic_payment_methods: {
+    enabled: true,
+  },
+});
+
+  res.json({
+      paymentIntent: paymentIntent.client_secret,
+      ephemeralKey: ephemeralKey.secret,
+      customer: customer.id,
+      publishableKey: 'pk_live_51M4E9pEh4Kq9bXBe3cJWSiz7dGFC9QTIO45dcNT3cuaRNuo66mMChGfSsOQCtXH8TxDLrvvg6JYcP7Rjl1MUYXGf005YbszUUl'
+  });
+
+    } catch (e) {
+      console.log(e.message);
+      res.json({ error: e.message });
+    }
+  });
 
 module.exports = router;
