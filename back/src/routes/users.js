@@ -30,48 +30,48 @@ router.post('', async (req, res) => {
 });
 
 // RUTA POST PARA MAIL DE BIENVENIDA Y
-// router.post('/email/:mail', async (req, res) => {
-//   try {
-//     const { mail } = req.params
+router.post('/email/:mail', async (req, res) => {
+  try {
+    const { mail } = req.params
 
-//     let transporter = nodemailer.createTransport({
-//       service: "gmail",
-//       host: "smtp.gmail.com",
-//       port: 587,
-//       secure: false, // true for 465, false for other ports
-//       auth: {
-//         user: "dpoweremail1@gmail.com", // generated ethereal user
-//         pass: "jteohkxgbidkubwr", // generated ethereal password
-//       },
-//     });
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: "dpoweremail1@gmail.com", // generated ethereal user
+        pass: "jteohkxgbidkubwr", // generated ethereal password
+      },
+    });
 
-//     // send mail with defined transport object
-//     let msg = {
-//       from: '"DPOWER team"', // sender address
-//       to: `${mail}`, // list of receivers
-//       subject: "Welcome to the Team", // Subject line
-//       html: "<div style='text-align:left'><p>Thanks for joining!<br/><br/>You are officially part of the DPOWER community! We want you to have a great time supporting and following the greatest athletes of all!.</p></div>", // html body
-//     };
+    // send mail with defined transport object
+    let msg = {
+      from: '"DPOWER team"', // sender address
+      to: `${mail}`, // list of receivers
+      subject: "Welcome to the Team", // Subject line
+      html: "<div style='text-align:left'><p>Thanks for joining!<br/><br/>You are officially part of the DPOWER community! We want you to have a great time supporting and following the greatest athletes of all!.</p></div>", // html body
+    };
 
-//     transporter.sendMail(msg, (error, info) => {
-//       if (error) {
-//         res.status(500).send(error.message)
-//       } else {
-//         console.log('Email enviado')
-//         res.status(200).json("Email enviado correctamente a " + mail)
-//       }
-//     });
+    transporter.sendMail(msg, (error, info) => {
+      if (error) {
+        res.status(500).send(error.message)
+      } else {
+        console.log('Email enviado')
+        res.status(200).json("Email enviado correctamente a " + mail)
+      }
+    });
 
-//     // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
-//     // Preview only available when sending through an Ethereal account
+    // Preview only available when sending through an Ethereal account
 
-//     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-//   }
-//   catch (error) {
-//     res.status(200).json({ message: error.message })
-//   }
-// })
+    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+  }
+  catch (error) {
+    res.status(200).json({ message: error.message })
+  }
+})
 
 // USUARIOS BASE DE DATOS NUESTRA //
 router.get('', async (req, res) => {
