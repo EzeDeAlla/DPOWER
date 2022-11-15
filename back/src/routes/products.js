@@ -100,15 +100,16 @@ router.put('/:id', async (req, res) => {
 
 
 
-router.post('/pay', async (req, res) => {
+router.post('/pay/:curren' , async (req, res) => {
   try {
+    const { curren } = req.params
     const customer = await stripe.customers.create();
     const ephemeralKey = await stripe.ephemeralKeys.create(
       { customer: customer.id },
       { apiVersion: '2022-08-01' }
     );
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: 1099,
+      amount: curren,
       currency: 'usd',
       customer: customer.id,
       automatic_payment_methods: {
