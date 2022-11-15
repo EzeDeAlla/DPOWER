@@ -3,7 +3,8 @@ const router = Router();
 const axios = require('axios');
 const { todaInfo } = require('../controllers');
 const { Product } = require('../db');
-const stripe = require('stripe')('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', {apiVersion:"2022-08-01" });
+//const stripe = require('stripe')('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', {apiVersion:"2022-08-01" });
+const stripe = require('stripe')('pk_test_51M4E9pEh4Kq9bXBevoiyg0Hj62Wpftk46CMLdh3EeXKrzuTRcQ183sVmxQqdCYFiiwih6ncz6hxFluRgC8jOQacj00rV3b75qe', {apiVersion:"2022-08-01" });
 
 // || /PRODUCTOS || //
 router.get('', async (req, res) => {
@@ -108,7 +109,7 @@ router.post('/pay', async (req, res) => {
     );
     const paymentIntent = await stripe.paymentIntents.create({
       amount: 1099,
-      currency: 'eur',
+      currency: 'usd',
       customer: customer.id,
       automatic_payment_methods: {
         enabled: true,
