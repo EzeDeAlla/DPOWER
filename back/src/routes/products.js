@@ -3,6 +3,7 @@ const router = Router();
 const axios = require('axios');
 const { todaInfo } = require('../controllers');
 const { Product } = require('../db');
+const stripe = require('stripe')(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, {apiVersion:"2022-08-01" });
 
 // || /PRODUCTOS || //
 router.get('', async (req, res) => {
@@ -93,6 +94,37 @@ router.put('/:id', async (req, res) => {
     res.json(product);
   } catch (error) {
     res.status(500).send({ message: error.message });
+  }
+});
+
+
+
+router.post('/pay', async (req, res) => {
+  try {
+    const customer = await stripe.customers.create();
+    const ephemeralKey = await stripe.ephemeralKeys.create(
+      { customer: customer.id },
+      { apiVersion: '2022-08-01' }
+    );
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: 1099,
+      currency: 'eur',
+      customer: customer.id,
+      automatic_payment_methods: {
+        enabled: true,
+      },
+    });
+
+    res.json({
+      paymentIntent: paymentIntent.client_secret,
+      ephemeralKey: ephemeralKey.secret,
+      customer: customer.id,
+      publishableKey: 'pk_live_51M4E9pEh4Kq9bXBe3cJWSiz7dGFC9QTIO45dcNT3cuaRNuo66mMChGfSsOQCtXH8TxDLrvvg6JYcP7Rjl1MUYXGf005YbszUUl'
+    });
+
+  } catch (e) {
+    console.log(e.message);
+    res.json({ error: e.message });
   }
 });
 
