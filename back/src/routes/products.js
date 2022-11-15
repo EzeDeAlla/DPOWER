@@ -3,8 +3,8 @@ const router = Router();
 const axios = require('axios');
 const { todaInfo } = require('../controllers');
 const { Product } = require('../db');
-//const stripe = require('stripe')('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', {apiVersion:"2022-08-01" });
-const stripe = require('stripe')('sk_test_51M4E9pEh4Kq9bXBeoMsYgx2W7IA0E0SDoTRolmf7S29P6SfU95WpYfxEqt9fbT3gQsSJy1cutjx8UfrMFxYjv4A900JXZGxCfq', {apiVersion:"2022-08-01" });
+const stripe = require('stripe')('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', {apiVersion:"2022-08-01" });
+//const stripe = require('stripe')('sk_test_51M4E9pEh4Kq9bXBeoMsYgx2W7IA0E0SDoTRolmf7S29P6SfU95WpYfxEqt9fbT3gQsSJy1cutjx8UfrMFxYjv4A900JXZGxCfq', {apiVersion:"2022-08-01" });
 
 // || /PRODUCTOS || //
 router.get('', async (req, res) => {
@@ -121,8 +121,8 @@ router.post('/pay/:curren' , async (req, res) => {
       paymentIntent: paymentIntent.client_secret,
       ephemeralKey: ephemeralKey.secret,
       customer: customer.id,
-      //publishableKey: 'pk_live_51M4E9pEh4Kq9bXBe3cJWSiz7dGFC9QTIO45dcNT3cuaRNuo66mMChGfSsOQCtXH8TxDLrvvg6JYcP7Rjl1MUYXGf005YbszUUl'
-      publishableKey: 'pk_test_51M4E9pEh4Kq9bXBevoiyg0Hj62Wpftk46CMLdh3EeXKrzuTRcQ183sVmxQqdCYFiiwih6ncz6hxFluRgC8jOQacj00rV3b75qe'
+      publishableKey: 'pk_live_51M4E9pEh4Kq9bXBe3cJWSiz7dGFC9QTIO45dcNT3cuaRNuo66mMChGfSsOQCtXH8TxDLrvvg6JYcP7Rjl1MUYXGf005YbszUUl'
+      //publishableKey: 'pk_test_51M4E9pEh4Kq9bXBevoiyg0Hj62Wpftk46CMLdh3EeXKrzuTRcQ183sVmxQqdCYFiiwih6ncz6hxFluRgC8jOQacj00rV3b75qe'
     });
 //
   } catch (e) {
