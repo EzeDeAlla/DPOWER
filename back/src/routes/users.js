@@ -29,6 +29,7 @@ router.post('', async (req, res) => {
   }
 });
 
+// RUTA POST PARA MAIL DE BIENVENIDA
 router.post('/email/:mail', async (req, res) => {
   try {
     const { mail } = req.params
