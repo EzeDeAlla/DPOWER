@@ -75,7 +75,9 @@ router.post('/email/:mail', async (req, res) => {
 // USUARIOS BASE DE DATOS NUESTRA //
 router.get('', async (req, res) => {
   try {
-    const allUsers = await UserInfo.findAll();
+    const allUsers = await UserInfo.findAll({
+      where: { active: true },
+    });
 
     res.json(allUsers);
   } catch (error) {
@@ -88,7 +90,11 @@ router.get('/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const user = await UserInfo.findByPk(id);
-    res.status(200).json(user);
+    if (user.active === true) {
+      res.status(200).json(user);
+    } else {
+      throw new Error('El usuario no existe');
+    }
   } catch (error) {
     res.status(500).send(error);
   }
@@ -117,6 +123,24 @@ router.put('/:id', async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 });
+
+// PATCH USUARIOS
+router.patch('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { active } = req.body;
+
+    const user = await UserInfo.findByPk(id);
+    user.active = active;
+
+    await user.save();
+
+    res.json(user);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+});
+
 // delete usuarios
 router.delete('/:id', async (req, res) => {
   try {
@@ -127,7 +151,6 @@ router.delete('/:id', async (req, res) => {
         where: {
           id,
         },
-        force: true,
       });
       res.sendStatus(204);
     } else {
