@@ -75,10 +75,7 @@ router.post('/email/:mail', async (req, res) => {
 // USUARIOS BASE DE DATOS NUESTRA //
 router.get('', async (req, res) => {
   try {
-    const allUsers = await UserInfo.findAll({
-      where: { active: true },
-    });
-
+    const allUsers = await UserInfo.findAll();
     res.json(allUsers);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -90,11 +87,7 @@ router.get('/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const user = await UserInfo.findByPk(id);
-    if (user.active === true) {
-      res.status(200).json(user);
-    } else {
-      throw new Error('El usuario no existe');
-    }
+    res.status(200).json(user);
   } catch (error) {
     res.status(500).send(error);
   }
