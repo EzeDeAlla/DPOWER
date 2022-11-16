@@ -1,32 +1,29 @@
 const { Router } = require('express');
+const { dbComments } = require('../controllers');
 const router = Router();
-const { Comment, UserInfo, Post } = require('../db');
+const { Comment } = require('../db');
 
-router.get('/:id', async (req, res) => {
-  const id = req.params.id;
-  const comment = await Comment.findByPk(id);
-  const idUser = comment.UserInfoId;
-  const commentWithUser = await Comment.findByPk(id, {
-    include: {
-      model: UserInfo,
-      attributes: ['name'],
-      where: {
-        id: idUser,
-      },
-    },
-  });
-  res.json(commentWithUser);
+
+// || GET /COMMENTS || // asd
+router.get('', async (req, res) => {
+  try{
+    const comments = await dbComments();
+    res.status(200).send(comments)
+  } catch (error) {
+    res.status(400).send(error);
+  }
 });
 
-// || POST /COMENTARIOS || //
+
+
+// asdasdas
+          // || POST /COMENTARIOS || //
 router.post('', async (req, res) => {
   try {
-    const { content, PostId, UserInfoId } = req.body;
-    if ((content, PostId, UserInfoId)) {
+    const { content, UserInfoId, PostId } = req.body;
+    if (content, UserInfoId, PostId) {
       const newComment = await Comment.create({
-        content,
-        PostId,
-        UserInfoId,
+        content, UserInfoId, PostId,
       });
       res.json(newComment);
     } else {
@@ -35,25 +32,21 @@ router.post('', async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-  // | AGREGAR RELACION USER | //
-  // | AGREGAR RELACION CON EL POST | //
+          // | AGREGAR RELACION USER | //
+          // | AGREGAR RELACION CON EL POST | //
 });
 
-// || DELETE /COMENTARIOS || //
+
+          // || DELETE /COMENTARIOS || //
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const comment = await Comment.findByPk(id);
-    if (comment !== null) {
-      await Comment.destroy({
-        where: {
-          id,
-        },
-      });
-      res.sendStatus(204);
-    } else {
-      throw new Error('the id does not exist');
-    }
+    await Comment.destroy({
+      where: {
+        id,
+      },
+    });
+    res.sendStatus(204);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

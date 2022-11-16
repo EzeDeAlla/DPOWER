@@ -38,16 +38,20 @@ module.exports = (sequelize) => {
     },
     powers: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
+    },
+    solicitud: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
     },
     validated: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
     },
     avatar: {
       type: DataTypes.TEXT,
-      allowNull: false,
-      defaultValue: 'https://ibb.co/vxdbDGJ',
+      allowNull: true,
+      // defaultValue: 'https://ibb.co/vxdbDGJ',
     },
   });
 };

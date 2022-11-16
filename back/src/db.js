@@ -50,7 +50,7 @@ const { Comment, Order, Post, Product, UserInfo, User } = sequelize.models;
 //   otherKey: 'FollowerId',
 //   as: 'subUserInfor',
 // });
-
+// relacion muchos a muchos para los usuarios poder seguir a otros usuarios
 UserInfo.belongsToMany(UserInfo, {
   as: 'follower',
   foreignKey: 'userToFollowId',
@@ -62,8 +62,24 @@ UserInfo.belongsToMany(UserInfo, {
   through: 'UserInfoFavorites',
 });
 
+// relacion muchos a muchos para los post y usuarios (controlar los likes) 
+UserInfo.belongsToMany(Post, {through: 'LikesForPost'})
+Post.belongsToMany(UserInfo, {through: 'LikesForPost'})
+
+// UserInfo.belongsToMany(Post, {
+//   as: 'viewer',
+//   foreignKey: 'postToLikeId',
+//   through: 'LikesForPost',
+// });
+// Post.belongsToMany(UserInfo, {
+//   as: 'postToLike',
+//   foreignKey: 'viewerId',
+//   through: 'LikesForPost',
+// });
+
 User.belongsTo(UserInfo);
 Post.belongsTo(UserInfo);
+Post.hasMany(Comment);
 Comment.belongsTo(Post);
 Comment.belongsTo(UserInfo);
 Order.belongsTo(UserInfo);
