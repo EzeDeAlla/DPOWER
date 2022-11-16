@@ -77,6 +77,21 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+router.put('/:id/:stock', async (req, res) => {
+  try {
+    const { id, stock } = req.params;
+
+    const product = await Product.findByPk(id);
+    product.stock = stock;
+
+    await product.save();
+
+    res.json(product);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+});
+
 // || PUT /PRODUCTOS || //
 router.put('/:id', async (req, res) => {
   try {
