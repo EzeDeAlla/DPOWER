@@ -128,9 +128,9 @@ router.patch('/:id', async (req, res) => {
 
     await user.save();
 
-    res.json(user);
+    return res.json(user);
   } catch (error) {
-    res.status(500).send({ message: error.message });
+    return res.status(500).send({ message: error.message });
   }
 });
 
