@@ -81,7 +81,7 @@ router.delete('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, stock, category, price, image } = req.body;
+    const { name, stock, category, price, image, description, published } = req.body;
 
     const product = await Product.findByPk(id);
     product.name = name;
@@ -89,6 +89,8 @@ router.put('/:id', async (req, res) => {
     product.category = category;
     product.price = price;
     product.image = image;
+    product.description = description;
+    product.published = published;
 
     await product.save();
 
